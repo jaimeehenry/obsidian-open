@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Open in Obsidian</title>
+<style>
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#1e1e1e;
+       color:#eee;display:flex;min-height:100vh;margin:0;align-items:center;justify-content:center;text-align:center}
+  .card{max-width:440px;padding:2rem}
+  h2{font-weight:600;margin:0 0 .5rem}
+  a.btn{display:inline-block;margin-top:1.2rem;padding:.85rem 1.5rem;background:#7c3aed;color:#fff;
+        text-decoration:none;border-radius:10px;font-size:1.1rem}
+  .f{opacity:.65;word-break:break-all;font-size:.9rem;margin-top:.5rem}
+</style>
+</head>
+<body>
+  <div class="card">
+    <h2>Opening in Obsidian…</h2>
+    <div class="f" id="f"></div>
+    <a class="btn" id="go" href="#">Tap to open</a>
+    <p class="f">Nothing happening? Make sure Obsidian is installed and the vault has synced.</p>
+  </div>
+  <script>
+    var p = new URLSearchParams(location.search);
+    var vault = p.get('vault') || '';
+    var file  = p.get('file')  || '';
+    var url = 'obsidian://open?vault=' + encodeURIComponent(vault) + '&file=' + encodeURIComponent(file);
+    document.getElementById('go').href = url;
+    document.getElementById('f').textContent = file;
+    // Auto-attempt the hand-off; the button is the user-initiated fallback iOS may require.
+    location.replace(url);
+  </script>
+</body>
+</html>
